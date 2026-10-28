@@ -6,7 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Configuración de la conexión a MySQL (XAMPP por defecto)
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -22,9 +21,6 @@ db.connect((err) => {
     console.log('Conectado exitosamente a la base de datos MySQL');
 });
 
-// ==========================================
-// ENDPOINTS PARA CATEGORÍA
-// ==========================================
 app.get('/api/categorias', (req, res) => {
     db.query('SELECT * FROM categoria', (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -66,9 +62,6 @@ app.delete('/api/categorias/:id', (req, res) => {
     });
 });
 
-// ==========================================
-// ENDPOINTS PARA CLIENTE
-// ==========================================
 app.get('/api/clientes', (req, res) => {
     db.query('SELECT * FROM cliente', (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -110,7 +103,6 @@ app.delete('/api/clientes/:id', (req, res) => {
     });
 });
 
-// Iniciar servidor
 app.listen(3000, () => {
     console.log('Servidor corriendo en el puerto 3000');
 });
